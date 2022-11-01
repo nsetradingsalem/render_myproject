@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp.apps.MyappConfig'
+    'myapp.apps.MyappConfig',
+        'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +77,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
+CELERY_IMPORTS = (
+    'myapp.tasks',
+)
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -100,11 +104,25 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': dj_database_url.config(        
+#         # Feel free to alter this value to suit your needs.        
+#         default='postgresql://nse_db_user:bN8F6sdYsiavq6qGGDif5XdtEljgF0fV@dpg-cdgnf32en0hj5eakgo5g-a:5432/nse_db',        
+#         conn_max_age=600    )}
+
+
 DATABASES = {
-    'default': dj_database_url.config(        
-        # Feel free to alter this value to suit your needs.        
-        default='postgresql://nse_db_user:bN8F6sdYsiavq6qGGDif5XdtEljgF0fV@dpg-cdgnf32en0hj5eakgo5g-a:5432/nse_db',        
-        conn_max_age=600    )}
+    'default': {
+        # 'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'd77rapdnpa9t1o',                      # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': 'yoaxduxaecfahz',
+        'PASSWORD': '0571710aba889e70d92571d6655f34867412faa3858884496d3082908daa0e18',
+        'HOST': 'ec2-52-70-86-157.compute-1.amazonaws.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '5432',                      # Set to empty string for default.
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -138,6 +156,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+# BROKER_URL = 'django://'
+# CELERY_BROKER_URL = 'redis://:p1b6b84e67facd107957e878035c0fc2ad3da5f6d4ca0c138e7bac0f4a3bfb055@ec2-54-152-181-10.compute-1.amazonaws.com:27179'
+# CELERY_RESULT_BACKEND = 'redis://:p1b6b84e67facd107957e878035c0fc2ad3da5f6d4ca0c138e7bac0f4a3bfb055@ec2-54-152-181-10.compute-1.amazonaws.com:27179'
+# Static files (CSS, JavaScript, Images)
+# Celery Configuration Options
+# CELERY_TIMEZONE = "Asia/kol"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
