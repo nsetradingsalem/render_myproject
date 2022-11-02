@@ -19,5 +19,5 @@ importlib-metadata = "4.13.0"
 
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["setuptools", "poetry_core"]
 build-backend = "poetry.core.masonry.api"
