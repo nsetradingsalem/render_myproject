@@ -13,6 +13,7 @@ psycopg2-binary = "^2.9.5"
 whitenoise = {extras = ["brotli"], version = "^6.2.0"}
 gunicorn = "^20.1.0"
 setuptools = "8.1"
+celery = "3.0.19"
 
 
 [build-system]
