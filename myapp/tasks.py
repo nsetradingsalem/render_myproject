@@ -13,7 +13,7 @@ from celery import Celery
 from celery.schedules import crontab
 import time
 from nsetools import Nse
-from myproject.celery import app
+from myproject.celery_settings import app
 from django_celery_beat.models import PeriodicTask, PeriodicTasks
 from datetime import datetime, time,timedelta
 from celery.exceptions import SoftTimeLimitExceeded
